@@ -287,7 +287,7 @@ const movies = [
     "Halloweentown High",
     "Halloweentown",
     "Good Luck Charlie, It's Christmas!",
-    "Flubber",
+    "Flubber"
 ];
 
 export default movies;
