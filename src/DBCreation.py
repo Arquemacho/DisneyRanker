@@ -48,7 +48,7 @@ def save_to_json(file_path, data):
         print(f"Error saving data to {file_path}: {e}")
 
 def main():
-    api_key = "83ec3237b21273a67ebe413154877f59"  # Replace with your TMDb API key
+    api_key = ""  # Replace with your TMDb API key
     movie_titles = read_movie_titles("movies.js")  # Replace with the path to your movies.js file
     posters = fetch_posters(api_key, movie_titles)
     save_to_json("movie_posters.json", posters)
