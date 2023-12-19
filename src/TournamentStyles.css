@@ -1,0 +1,203 @@
+/* Overall layout styles */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #FFE0B2; /* Warm light orange for a Disney-like feel */}
+
+/* Style for h2 elements */
+h2 {
+  font-size: 28px;
+  color: #E65100; /* Deep orange */
+  margin: 20px 0;
+  text-align: center;
+
+}
+
+/* Style for h3 (Movie Titles) */
+h3 {
+  font-size: 18px;
+  color: #1A237E; /* Deep blue for contrast */
+  margin: 10px 0;
+  text-align: center;
+}
+
+.mode-buttons {
+  margin: 20px;
+}
+
+/* Tournament mode styles */
+.tournament-container {
+  background-image: url('TournamentBackground.png'); /* Update with the correct path */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Tournament Information Styling */
+.tournament-info {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.tournament-info p {
+  font-size: 18px;
+  color: #333;
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+.matchup {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.movie-poster {
+  width: 250px;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.card {
+  border: 2px solid #4A90E2; /* Disney blue */
+  background-color: #F0F8FF; /* Light background */
+  padding: 20px;
+  margin: 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  background-color: #E1F5FE; /* Lighter blue on hover */
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.6);
+}
+
+/* Winner section styles */
+.winner-container {
+  margin-top: 20px;
+  background-color: #ffff99; /* Light yellow */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  width: 60%;
+}
+
+.winner-title {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.winner-poster {
+  width: 300px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Button styles */
+.button {
+  padding: 10px 20px;
+  background-color: #4CAF50; /* Green */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.button:hover {
+  background-color: white;
+  color: black;
+  border: 2px solid #4CAF50;
+}
+
+/* Mobile responsiveness for matchup */
+@media screen and (max-width: 1024px) {
+  .matchup {
+    flex-direction: column;
+  }
+
+  .card {
+    width: 60%; /* Adjust width to fit two cards vertically */
+    margin: 10px auto; /* Centering in mobile view */
+    padding: 10px; /* Reduce padding */
+  }
+
+  .movie-poster {
+    width: 125px;
+    height: auto;
+    margin-bottom: 10px; 
+    border-radius: 5px;
+  }
+  h2 {
+    font-size: 20px;
+    color: #4A90E2; /* Disney-themed blue color */
+    margin: 10px 0;
+    text-align: center;
+  }
+  h3 {
+    font-size: 15px;
+    color: #4A90E2; /* Disney-themed blue color */
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  .mode-buttons {
+    margin: 10px;
+  }
+
+  /* Tournament mode styles */
+  .tournament-container {
+    background-color: #fff; /* White background for contrast */
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Tournament Information Styling */
+  .tournament-info {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+}
+
+.movie-winner {
+    transform: scale(1.1); /* Make it a bit bigger */
+    transition: all 0.5s ease;
+    filter: brightness(1.2); /* Optional: to give a glow effect */
+}
+
+.movie-winner-left {
+    transform: translateX(-100px) scale(1.1);
+}
+
+.movie-winner-right {
+    transform: translateX(100px) scale(1.1);
+}
+
+.movie-loser {
+    transform: scale(0.8);
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
