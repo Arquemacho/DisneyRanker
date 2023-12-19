@@ -40,11 +40,11 @@ const MovieSelectionScreen = () => {
 
     return (
         <div>
-            {staticMovies.map(movie => (
-                <div key={movie.id} onClick={() => handleMovieSelect(movie)}>
-                    {movie.title}
-                </div>
-            ))}
+            {/*{staticMovies.map(movie => (*/}
+                {/*<div key={movie.id} onClick={() => handleMovieSelect(movie)}>*/}
+                   {/* {movie.title}*/}
+                {/*</div>*/}
+            {/*))}*/}
             <button onClick={startTournamentOrRanking}>Start</button>
         </div>
     );

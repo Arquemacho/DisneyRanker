@@ -12,7 +12,7 @@ const LandingPage = () => {
         <div className="landing-page">
             {/* Logo and Header */}
             <button onClick={() => navigateToSelection('tournament')}>Start Tournament</button>
-            <button onClick={() => navigateToSelection('ranking')}>Start Ranking</button>
+           {/* <button onClick={() => navigateToSelection('ranking')}>Start Ranking</button>*/}
         </div>
     );
 };
