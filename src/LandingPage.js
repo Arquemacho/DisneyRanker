@@ -1,4 +1,5 @@
 import React from 'react';
+import './TournamentStyles.css';
 import { useNavigate } from 'react-router-dom';
 
 const LandingPage = () => {

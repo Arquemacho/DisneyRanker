@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import './TournamentStyles.css';
+
 
 // Example static list of movies
 const staticMovies = [
