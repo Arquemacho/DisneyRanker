@@ -87,6 +87,7 @@ const Tournament = () => {
                 setWinner(updatedNextRound[0]);
             } else {
                 const newRound = createRound(updatedNextRound);
+                setCurrentRound([]); // <-- Change made here
                 setCurrentRound(newRound);
                 setTotalMatchupsInRound(newRound.length);
                 setNextRound([]);
@@ -135,15 +136,15 @@ const Tournament = () => {
 
     const getRoundName = (numMovies) => {
         if (numMovies <= 2) return 'Final';
-        if (numMovies <= 4) return 'Semi Finals';
-        if (numMovies <= 8) return 'Quarter Finals';
-        if (numMovies <= 16) return 'Round of 16';
-        if (numMovies <= 32) return 'Round of 32';
-        if (numMovies <= 64) return 'Round of 64';
-        if (numMovies <= 128) return 'Round of 128';
-        if (numMovies <= 256) return 'Round of 256';
-        if (numMovies <= 512) return 'Round of 512';
-        if (numMovies <= 1024) return 'Round of 1024';
+        if (numMovies <= 4) return 'Semi Final';
+        if (numMovies <= 8) return 'Cuartos de Final';
+        if (numMovies <= 16) return 'Octavos de Final';
+        if (numMovies <= 32) return 'Ronda de 32';
+        if (numMovies <= 64) return 'Ronda de 64';
+        if (numMovies <= 128) return 'Ronda de 128';
+        if (numMovies <= 256) return 'Ronda de 256';
+        if (numMovies <= 512) return 'Ronda de 512';
+        if (numMovies <= 1024) return 'Ronda de 1024';
         return '';
     };
 
@@ -168,18 +169,17 @@ const Tournament = () => {
 
     return (
         <div className="tournament-container">
-            <h2>Tournament Mode</h2>
+            <h2>Modo Torneo</h2>
             {!winner && (
                 <div>
                     <div className="tournament-info">
-                        <p>Current Matchup: {matchupIndex + 1} out of {totalMatchupsInRound}</p>
-                        <p>Current Round: {roundName}</p>
+                        <p>Enfrentamiento Actual: {matchupIndex + 1} de {totalMatchupsInRound}</p>
+                        <p>Ronda Actual: {roundName}</p>
                     </div>
                     <div className="matchup">
                         {currentRound[matchupIndex] && currentRound[matchupIndex].map((movie, index) => (
-                            <div key={index} className="card" onClick={() => selectMovie(movie)}>
+                            <div key={`${movie}-${index}`} className="card" onClick={() => selectMovie(movie)}> {/* Change made here */}
                                 <MoviePoster title={movie} />
-                                {/*<button onClick={() => deleteMovie(movie)}>Delete Movie</button>*/}
                             </div>
                         ))}
                     </div>
