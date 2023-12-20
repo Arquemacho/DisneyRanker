@@ -33,7 +33,6 @@ const movies = [
     "Mary Poppins",
     "The Lizzie McGuire Movie",
     "Sharpay's Fabulous Adventure",
-    "Kim Possible",
     "101 Dalmatians [live action]",
     "The Jungle Book 2",
     "Ready to Run",
