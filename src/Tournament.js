@@ -231,7 +231,7 @@ const Tournament = () => {
                 </div>
             )}
             <div className="footnote">
-                Desarrollado por <a href="https://www.instagram.com/nicocamachoaa/" target="_blank" rel="noopener noreferrer">Nico Camacho</a>
+                Creado por <a href="https://www.instagram.com/nicocamachoaa/" target="_blank" rel="noopener noreferrer">Nico Camacho</a>
             </div>
 
         </div>
