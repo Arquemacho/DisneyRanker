@@ -197,8 +197,9 @@ const Tournament = () => {
 
         return (
             <div className="winner-container">
-                <h3>Winner:</h3>
+                <h3>Ganador:</h3>
                 <MoviePoster title={winner} />
+                {/* Other elements like a close button can be added here */}
             </div>
         );
     }
@@ -208,13 +209,18 @@ const Tournament = () => {
 
     return (
         <div className="tournament-container">
-            <h2>Modo Torneo</h2>
+            <div className="tournament-title">Torneo de Disney</div>
             {!winner && (
                 <div>
-                    <div className="tournament-info">
-                        <p>Enfrentamiento Actual: {matchupIndex + 1} de {totalMatchupsInRound}</p>
-                        <p>Ronda Actual: {roundName}</p>
+                    <div className="info-container">
+                        <div className="info-box">
+                            <p>Enfrentamiento Actual: {matchupIndex + 1} de {totalMatchupsInRound}</p>
+                        </div>
+                        <div className="info-box">
+                            <p>Ronda Actual: {roundName}</p>
+                        </div>
                     </div>
+
                     <div className="matchup">
                         {currentRound[matchupIndex] && currentRound[matchupIndex].map((movie, index) => (
                             <div key={`${movie}-${index}`} className="card" onClick={() => selectMovie(movie)}> {/* Change made here */}
@@ -224,6 +230,10 @@ const Tournament = () => {
                     </div>
                 </div>
             )}
+            <div className="footnote">
+                Desarrollado por <a href="https://www.instagram.com/nicocamachoaa/" target="_blank" rel="noopener noreferrer">Nico Camacho</a>
+            </div>
+
         </div>
     );
 };
