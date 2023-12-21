@@ -21,6 +21,10 @@ const Tournament = () => {
         setSessionID(generateUniqueID());
     }, []);
 
+    function generateUniqueID() {
+        return Math.random().toString(36).substr(2, 9);
+    }
+
     useEffect(() => {
         const savedState = localStorage.getItem('tournamentState');
         if (savedState) {
@@ -32,23 +36,20 @@ const Tournament = () => {
             setTotalMatchupsInRound(totalMatchupsInRound);
             setSelectionHistory(selectionHistory);
         } else {
+            // Only initialize a new tournament if there is no saved state
             initializeTournament(movies);
         }
     }, []);
 
-    
-    function generateUniqueID() {
-        return Math.random().toString(36).substr(2, 9);
-    }
-
     useEffect(() => {
-        if (moviesFromSelection.length > 0) {
+        const savedState = localStorage.getItem('tournamentState');
+        if (!savedState && moviesFromSelection.length > 0) {
             initializeTournament(moviesFromSelection);
-        } else {
-            // Handle case where no movies are passed
+        } else if (!savedState) {
             initializeTournament(movies);
         }
     }, [moviesFromSelection]);
+
 
     const startNewTournament = () => {
         localStorage.removeItem('tournamentState'); // Clear saved state
@@ -141,6 +142,7 @@ const Tournament = () => {
             setNextRound(updatedNextRound);
             setMatchupIndex(prevIndex => prevIndex + 1);
         }
+        saveStateToLocalStorage();
     }
 
     const saveStateToLocalStorage = () => {
@@ -237,6 +239,7 @@ const Tournament = () => {
             <div className="winner-container">
                 <h3>Ganador:</h3>
                 <MoviePoster title={winner} />
+                <button className="button" onClick={startNewTournament}>Empezar un Nuevo Torneo</button>
                 {/* Other elements like a close button can be added here */}
             </div>
         );
