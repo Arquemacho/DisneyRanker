@@ -28,6 +28,7 @@ h3 {
 }
 
 .tournament-container {
+  min-height: 100vh;
   background-image: url('TournamentBackground.png'); /* Update with the correct path */
   background-size: cover;
   background-repeat: no-repeat;
