@@ -21,6 +21,21 @@ const Tournament = () => {
         setSessionID(generateUniqueID());
     }, []);
 
+    useEffect(() => {
+        const savedState = localStorage.getItem('tournamentState');
+        if (savedState) {
+            const { currentRound, nextRound, winner, matchupIndex, totalMatchupsInRound, selectionHistory } = JSON.parse(savedState);
+            setCurrentRound(currentRound);
+            setNextRound(nextRound);
+            setWinner(winner);
+            setMatchupIndex(matchupIndex);
+            setTotalMatchupsInRound(totalMatchupsInRound);
+            setSelectionHistory(selectionHistory);
+        } else {
+            initializeTournament(movies);
+        }
+    }, []);
+
     
     function generateUniqueID() {
         return Math.random().toString(36).substr(2, 9);
@@ -34,6 +49,11 @@ const Tournament = () => {
             initializeTournament(movies);
         }
     }, [moviesFromSelection]);
+
+    const startNewTournament = () => {
+        localStorage.removeItem('tournamentState'); // Clear saved state
+        initializeTournament(movies); // Start a new tournament
+    };
 
     useEffect(() => {
         // Automatically advance if only one movie in the matchup
@@ -122,6 +142,24 @@ const Tournament = () => {
             setMatchupIndex(prevIndex => prevIndex + 1);
         }
     }
+
+    const saveStateToLocalStorage = () => {
+        const state = {
+            currentRound,
+            nextRound,
+            winner,
+            matchupIndex,
+            totalMatchupsInRound,
+            selectionHistory,
+        };
+        localStorage.setItem('tournamentState', JSON.stringify(state));
+    };
+
+    useEffect(() => {
+        // Save state to local storage whenever there's a change
+        saveStateToLocalStorage();
+    }, [currentRound, nextRound, winner, matchupIndex, totalMatchupsInRound, selectionHistory]);
+
     
     async function sendDataToBackend(selection) {
         try {
@@ -228,6 +266,7 @@ const Tournament = () => {
                             </div>
                         ))}
                     </div>
+                    <button className="button" onClick={startNewTournament}>Empezar un Nuevo Torneo</button>
                 </div>
             )}
             <div className="footnote">
