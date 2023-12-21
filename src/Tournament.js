@@ -21,10 +21,6 @@ const Tournament = () => {
         setSessionID(generateUniqueID());
     }, []);
 
-    function generateUniqueID() {
-        return Math.random().toString(36).substr(2, 9);
-    }
-
     useEffect(() => {
         const savedState = localStorage.getItem('tournamentState');
         if (savedState) {
@@ -36,20 +32,23 @@ const Tournament = () => {
             setTotalMatchupsInRound(totalMatchupsInRound);
             setSelectionHistory(selectionHistory);
         } else {
-            // Only initialize a new tournament if there is no saved state
             initializeTournament(movies);
         }
     }, []);
 
+    
+    function generateUniqueID() {
+        return Math.random().toString(36).substr(2, 9);
+    }
+
     useEffect(() => {
-        const savedState = localStorage.getItem('tournamentState');
-        if (!savedState && moviesFromSelection.length > 0) {
+        if (moviesFromSelection.length > 0) {
             initializeTournament(moviesFromSelection);
-        } else if (!savedState) {
+        } else {
+            // Handle case where no movies are passed
             initializeTournament(movies);
         }
     }, [moviesFromSelection]);
-
 
     const startNewTournament = () => {
         localStorage.removeItem('tournamentState'); // Clear saved state
@@ -142,7 +141,6 @@ const Tournament = () => {
             setNextRound(updatedNextRound);
             setMatchupIndex(prevIndex => prevIndex + 1);
         }
-        saveStateToLocalStorage();
     }
 
     const saveStateToLocalStorage = () => {
