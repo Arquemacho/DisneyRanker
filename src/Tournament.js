@@ -4,6 +4,7 @@ import MoviePoster from './MoviePoster';
 import { useLocation } from 'react-router-dom';
 import './TournamentStyles.css';
 import confetti from 'canvas-confetti';
+import {TwitterShareButton,WhatsappShareButton,TwitterIcon,WhatsappIcon} from 'react-share';
 
 const Tournament = () => {
     const [currentRound, setCurrentRound] = useState([]);
@@ -226,21 +227,26 @@ const Tournament = () => {
     };
 
     if (winner) {
-        // Trigger confetti
-        confetti({
-            particleCount: 300,
-            spread: 100,
-            origin: { y: 0.6 }
-        });
+      const shareUrl = 'http://186.113.234.239:3000/';
+      const title = `Mi película favorita de Disney es ${winner}. ¡Averigua cuál es la tuya!`;
 
-        return (
-            <div className="winner-container">
-                <h3>Ganador:</h3>
-                <MoviePoster title={winner} />
-                <button className="button" onClick={startNewTournament}>Empezar un Nuevo Torneo</button>
-                {/* Other elements like a close button can be added here */}
-            </div>
-        );
+      return (
+        <div className="winner-container">
+          <h3>Ganador: {winner}</h3>
+          <MoviePoster title={winner} />
+          <button className="button" onClick={startNewTournament}>Empezar un Nuevo Torneo</button>
+
+          <TwitterShareButton url={shareUrl} title={title}>
+            <TwitterIcon size={32} round />
+          </TwitterShareButton>
+
+          <WhatsappShareButton url={shareUrl} title={title}>
+            <WhatsappIcon size={32} round />
+          </WhatsappShareButton>
+
+          {/* Other elements */}
+        </div>
+      );
     }
 
     const roundName = getRoundName(currentRound.length * 2);
