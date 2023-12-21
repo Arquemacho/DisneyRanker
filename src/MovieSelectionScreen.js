@@ -41,13 +41,18 @@ const MovieSelectionScreen = () => {
     };
 
     return (
-        <div>
-            {/*{staticMovies.map(movie => (*/}
-                {/*<div key={movie.id} onClick={() => handleMovieSelect(movie)}>*/}
-                   {/* {movie.title}*/}
-                {/*</div>*/}
-            {/*))}*/}
-            <button className="button" onClick={startTournamentOrRanking}>Empezar Torneo!</button>
+        <div className="landing-page">
+            <div className="button-container">
+                {/*{staticMovies.map(movie => (*/}
+                    {/*<div key={movie.id} onClick={() => handleMovieSelect(movie)}>*/}
+                       {/* {movie.title}*/}
+                    {/*</div>*/}
+                {/*))}*/}
+                <button className="button" onClick={startTournamentOrRanking}>Empezar Torneo!</button>
+            </div>
+            <div className="footnote">
+                Creado por <a href="https://www.instagram.com/nicocamachoaa/" target="_blank" rel="noopener noreferrer">Nico Camacho</a>
+            </div>
         </div>
     );
 };
