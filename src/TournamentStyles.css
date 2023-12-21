@@ -32,9 +32,9 @@ h3 {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  padding: 10px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   text-align: center;
 }
 
@@ -43,14 +43,14 @@ h3 {
   justify-content: center;
   align-items: center;
   background-color: #f2f2f2;
-  padding: 10px;
-  border-radius: 8px;
+  padding: 8px;
+  border-radius: 6px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .tournament-info p {
-  margin: 0 10px;
+  margin: 0 8px;
   font-size: 1.1em;
   color: #333;
 }
@@ -58,8 +58,8 @@ h3 {
 .info-container {
   display: flex;
   justify-content: center;
-  gap: 15px; /* Space between items */
-  margin-bottom: 20px;
+  gap: 12px; /* Space between items */
+  margin-bottom: 15px;
 }
 
 .info-box {
