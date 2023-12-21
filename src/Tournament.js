@@ -232,7 +232,7 @@ const Tournament = () => {
 
       return (
         <div className="winner-container">
-          <h3>Ganador: {winner}</h3>
+          <h3>Ganador:</h3>
           <MoviePoster title={winner} />
           <button className="button" onClick={startNewTournament}>Empezar un Nuevo Torneo</button>
 
