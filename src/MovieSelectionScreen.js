@@ -47,7 +47,7 @@ const MovieSelectionScreen = () => {
                    {/* {movie.title}*/}
                 {/*</div>*/}
             {/*))}*/}
-            <button className="button" onClick={startTournamentOrRanking}>Iniciar!</button>
+            <button className="button" onClick={startTournamentOrRanking}>Empezar Torneo!</button>
         </div>
     );
 };

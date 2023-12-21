@@ -13,6 +13,18 @@ const Tournament = () => {
     const [totalMatchupsInRound, setTotalMatchupsInRound] = useState(0);
     const location = useLocation();
     const moviesFromSelection = location.state?.movies || [];
+    const [selectionHistory, setSelectionHistory] = useState([]);
+    const [sessionID, setSessionID] = useState('');
+
+    useEffect(() => {
+        // Generate a session ID when the component mounts
+        setSessionID(generateUniqueID());
+    }, []);
+
+    
+    function generateUniqueID() {
+        return Math.random().toString(36).substr(2, 9);
+    }
 
     useEffect(() => {
         if (moviesFromSelection.length > 0) {
@@ -79,15 +91,27 @@ const Tournament = () => {
 
     function selectMovie(movie) {
         if (winner) return;
-
+    
         let updatedNextRound = [...nextRound, movie];
-
+    
+        // Log the selection
+        const selection = {
+            movie: movie, // Replace with movie ID if available
+            round: currentRound.length,
+            timestamp: new Date().toISOString()
+        };
+    
+        // Update the selection history
+        setSelectionHistory(prevHistory => [...prevHistory, selection]);
+    
+        // Send selection data to the backend
+        sendDataToBackend(selection);
+    
         if (matchupIndex === currentRound.length - 1) {
             if (updatedNextRound.length === 1) {
                 setWinner(updatedNextRound[0]);
             } else {
                 const newRound = createRound(updatedNextRound);
-                setCurrentRound([]); // <-- Change made here
                 setCurrentRound(newRound);
                 setTotalMatchupsInRound(newRound.length);
                 setNextRound([]);
@@ -98,6 +122,21 @@ const Tournament = () => {
             setMatchupIndex(prevIndex => prevIndex + 1);
         }
     }
+    
+    async function sendDataToBackend(selection) {
+        try {
+            await fetch('http://your-backend-url/api/selection', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(selection),
+            });
+        } catch (error) {
+            console.error('Error sending selection data to backend:', error);
+        }
+    }    
+    
     const deleteMovie = async (movieTitle) => {
         try {
             // Update the URL to point to your backend server on port 3001
