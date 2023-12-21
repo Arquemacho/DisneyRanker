@@ -78,6 +78,7 @@ h3 {
   margin: 15px auto; /* Centered with auto margins */
   font-size: 1.5em; /* Adjust font size as needed */
   max-width: 50%; /* Maximum width */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .matchup {
