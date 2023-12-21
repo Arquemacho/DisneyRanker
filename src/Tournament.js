@@ -125,7 +125,7 @@ const Tournament = () => {
     
     async function sendDataToBackend(selection) {
         try {
-            await fetch('http://your-backend-url/api/selection', {
+            await fetch('http://186.113.234.239:3001/api/selection', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -135,7 +135,7 @@ const Tournament = () => {
         } catch (error) {
             console.error('Error sending selection data to backend:', error);
         }
-    }    
+    }      
     
     const deleteMovie = async (movieTitle) => {
         try {
