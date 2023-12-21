@@ -226,6 +226,10 @@ h3 {
       padding: 8px; /* Reduced padding */
       margin-top: 10px; /* Adjust top margin */
   }
+
+  .info-box p {
+        font-size: 0.6em; /* Adjust the font size for mobile view */
+    }
 }
 
 .movie-winner {
