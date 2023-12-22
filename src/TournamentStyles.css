@@ -148,21 +148,25 @@ h3 {
 }
 
 .button {
-  padding: 7px 14px;
-  background-color: #4CAF50; /* Green */
+  padding: 10px 20px;
+  background-color: #007bff; /* Blue color */
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.2s ease-in-out;
+  font-size: 18px;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase; /* Optional: makes text uppercase */
 }
 
 .button:hover {
-  background-color: palegreen;
-  color: black;
-/*  border: 2px solid #4CAF50;*/
+  background-color: #0056b3; /* Darker shade of blue */
+  color: #fff;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
+
 
 .button-container {
     display: flex;
@@ -275,4 +279,16 @@ h3 {
 .footnote a {
   color: #007bff;
   text-decoration: none;
+}
+
+.social-share-buttons {
+  display: flex;
+  justify-content: center; /* Center the buttons horizontally */
+  align-items: center; /* Align the buttons vertically */
+  flex-direction: column; /* Stack the buttons vertically */
+  margin-top: 10px; /* Space above the buttons */
+}
+
+.social-share-buttons > * {
+  margin: 5px 0; /* Space between buttons */
 }
