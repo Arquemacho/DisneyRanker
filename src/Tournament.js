@@ -226,27 +226,41 @@ const Tournament = () => {
         return '';
     };
 
+    useEffect(() => {
+        if (winner) {
+            triggerConfetti();
+        }
+    }, [winner]); // Dependency array with 'winner' to run only when 'winner' changes
+    const triggerConfetti = () => {
+        confetti({
+            particleCount: 2001,
+            spread: 300,
+            origin: { y: 0.4} // Adjust as needed
+        });
+    };
+        
+
     if (winner) {
-      const shareUrl = 'http://186.113.234.239:3000/';
-      const title = `Mi película favorita de Disney es ${winner}. ¡Averigua cuál es la tuya!`;
-
-      return (
-        <div className="winner-container">
-          <h3>Ganador:</h3>
-          <MoviePoster title={winner} />
-          <button className="button" onClick={startNewTournament}>Empezar un Nuevo Torneo</button>
-
-          <TwitterShareButton url={shareUrl} title={title}>
-            <TwitterIcon size={32} round />
-          </TwitterShareButton>
-
-          <WhatsappShareButton url={shareUrl} title={title}>
-            <WhatsappIcon size={32} round />
-          </WhatsappShareButton>
-
-          {/* Other elements */}
-        </div>
-      );
+        const shareUrl = 'http://186.113.234.239:3000/';
+        const title = `Mi película favorita de Disney es ${winner}. ¡Averigua cuál es la tuya!`;
+    
+        return (
+            <div className="winner-container">
+                <h3>Ganador:</h3>
+                <MoviePoster title={winner} />
+                <button className="button" onClick={startNewTournament}>Empezar un Nuevo Torneo</button>
+    
+                <div className="social-share-buttons">
+                    <TwitterShareButton url={shareUrl} title={title}>
+                        <TwitterIcon size={32} round />
+                    </TwitterShareButton>
+    
+                    <WhatsappShareButton url={shareUrl} title={title}>
+                        <WhatsappIcon size={32} round />
+                    </WhatsappShareButton>
+                </div>
+            </div>
+        );
     }
 
     const roundName = getRoundName(currentRound.length * 2);
@@ -254,15 +268,15 @@ const Tournament = () => {
 
     return (
         <div className="tournament-container">
-            <div className="tournament-title">Torneo de Disney</div>
+            <div className="tournament-title">Torneo de Peliculas Disney</div>
             {!winner && (
                 <div>
                     <div className="info-container">
                         <div className="info-box">
-                            <p>Enfrentamiento Actual: {matchupIndex + 1} de {totalMatchupsInRound}</p>
+                            <p>Enfrentamiento {matchupIndex + 1} de {totalMatchupsInRound}</p>
                         </div>
                         <div className="info-box">
-                            <p>Ronda Actual: {roundName}</p>
+                            <p>{roundName}</p>
                         </div>
                     </div>
 
@@ -277,7 +291,7 @@ const Tournament = () => {
                 </div>
             )}
             <div className="footnote">
-                Creado por <a href="https://www.instagram.com/nicocamachoaa/" target="_blank" rel="noopener noreferrer">Nico Camacho</a>
+                Creado por <a href="https://www.instagram.com/nicocamachoaa/" target="_blank" rel="noopener noreferrer">Nicolas Camacho</a>
             </div>
 
         </div>
