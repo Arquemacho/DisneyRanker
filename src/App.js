@@ -4,11 +4,11 @@ import LandingPage from './LandingPage';
 import MovieSelectionScreen from './MovieSelectionScreen';
 import Tournament from './Tournament';
 import Ranking from './Ranking';
-import PrivateRoute from './PrivateRoute'; // Adjust the path as needed
-import AdminDashboard from './AdminDashboard'; // Adjust the path as needed
-import MoviesManagement from './MoviesManagement'; // Adjust the path as needed
-import UserStats from './UserStats'; // Adjust the path as needed
-import DeviceUsage from './DeviceUsage'; // Adjust the path as needed
+import PrivateRoute from './admin/PrivateRoute'; // Adjust the path as needed
+import AdminDashboard from './admin//AdminDashboard'; // Adjust the path as needed
+import MoviesManagement from './admin//MoviesManagement'; // Adjust the path as needed
+import UserStats from './admin//UserStats'; // Adjust the path as needed
+import DeviceUsage from './admin//DeviceUsage'; // Adjust the path as needed
 
 const App = () => {
     return (
