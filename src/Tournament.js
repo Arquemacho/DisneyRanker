@@ -110,24 +110,32 @@ const Tournament = () => {
 
 
 
-    function selectMovie(movie) {
+    function selectMovie(selectedMovie) {
         if (winner) return;
-    
-        let updatedNextRound = [...nextRound, movie];
-    
+
+        let updatedNextRound = [...nextRound, selectedMovie];
+
+        // Find the loser movie
+        const loserMovie = currentRound[matchupIndex].find(movie => movie !== selectedMovie);
+
         // Log the selection
         const selection = {
-            movie: movie, // Replace with movie ID if available
+            sessionID: sessionID, // Include session ID
+            matchup: {
+                winner: selectedMovie,
+                loser: loserMovie
+            },
             round: currentRound.length,
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
+            deviceInfo: navigator.userAgent // Include device and browser data
         };
-    
+
         // Update the selection history
         setSelectionHistory(prevHistory => [...prevHistory, selection]);
-    
+
         // Send selection data to the backend
         sendDataToBackend(selection);
-    
+
         if (matchupIndex === currentRound.length - 1) {
             if (updatedNextRound.length === 1) {
                 setWinner(updatedNextRound[0]);

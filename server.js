@@ -20,9 +20,12 @@ const db = new sqlite3.Database('./myTournamentData.db', (err) => {
 const createSelectionsTable = () => {
     db.run(`CREATE TABLE IF NOT EXISTS selections (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        movie TEXT,
+        sessionID TEXT,
+        winner TEXT,
+        loser TEXT,
         round INTEGER,
-        timestamp TEXT
+        timestamp TEXT,
+        deviceInfo TEXT
     )`, [], (err) => {
         if (err) {
             console.error('Error creating selections table:', err.message);
@@ -35,12 +38,12 @@ const createSelectionsTable = () => {
 createSelectionsTable();
 
 app.post('/api/selection', (req, res) => {
-    const { movie, round, timestamp } = req.body;
+    const { sessionID, matchup, round, timestamp, deviceInfo } = req.body;
 
-    console.log('Received selection:', { movie, round, timestamp }); // Log the received data
+    console.log('Received selection:', { sessionID, matchup, round, timestamp, deviceInfo });
 
-    const sql = `INSERT INTO selections (movie, round, timestamp) VALUES (?, ?, ?)`;
-    db.run(sql, [movie, round, timestamp], (err) => {
+    const sql = `INSERT INTO selections (sessionID, winner, loser, round, timestamp, deviceInfo) VALUES (?, ?, ?, ?, ?, ?)`;
+    db.run(sql, [sessionID, matchup.winner, matchup.loser, round, timestamp, deviceInfo], (err) => {
         if (err) {
             console.error('Error inserting data into selections table:', err.message);
             res.status(500).send(err.message);
@@ -50,6 +53,7 @@ app.post('/api/selection', (req, res) => {
         res.status(200).send('Selection data received and stored');
     });
 });
+
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
