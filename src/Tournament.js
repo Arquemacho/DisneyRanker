@@ -55,8 +55,9 @@ const Tournament = () => {
         localStorage.removeItem('tournamentState'); // Clear saved state
         setTotalMatchupsInRound(0); // Reset the total matchups for the new tournament
         initializeTournament(movies); // Start a new tournament
-        setSessionID(generateUniqueID(existingSessionIDs));
+        setSessionID(generateUniqueID()); // Generate new session ID
     };
+
 
     useEffect(() => {
         // Automatically advance if only one movie in the matchup
