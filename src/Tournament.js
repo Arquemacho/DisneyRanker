@@ -53,7 +53,9 @@ const Tournament = () => {
 
     const startNewTournament = () => {
         localStorage.removeItem('tournamentState'); // Clear saved state
+        setTotalMatchupsInRound(0); // Reset the total matchups for the new tournament
         initializeTournament(movies); // Start a new tournament
+        setSessionID(generateUniqueID(existingSessionIDs));
     };
 
     useEffect(() => {
@@ -119,16 +121,19 @@ const Tournament = () => {
         const loserMovie = currentRound[matchupIndex].find(movie => movie !== selectedMovie);
 
         // Log the selection
+        const tournamentRound = calculateTournamentRound(totalMatchupsInRound);
+
         const selection = {
-            sessionID: sessionID, // Include session ID
+            sessionID: sessionID,
             matchup: {
                 winner: selectedMovie,
                 loser: loserMovie
             },
-            round: currentRound.length,
+            round: tournamentRound, // Use the calculated round
             timestamp: new Date().toISOString(),
-            deviceInfo: navigator.userAgent // Include device and browser data
+            deviceInfo: navigator.userAgent
         };
+
 
         // Update the selection history
         setSelectionHistory(prevHistory => [...prevHistory, selection]);
@@ -163,6 +168,10 @@ const Tournament = () => {
         };
         localStorage.setItem('tournamentState', JSON.stringify(state));
     };
+
+    function calculateTournamentRound(totalMatchups) {
+        return Math.pow(2, Math.ceil(Math.log2(totalMatchups * 2)));
+    }
 
     useEffect(() => {
         // Save state to local storage whenever there's a change
