@@ -6,8 +6,10 @@ const AdminLogin = () => {
     const { validatePassword, error } = useAuth();
 
     const handleLogin = () => {
+        console.log("Login button clicked");
         validatePassword(password);
     };
+
 
     return (
         <div>
