@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useAuth from './useAuth';
 
 const AdminLogin = () => {
     const [password, setPassword] = useState('');
-    const { validatePassword, error } = useAuth();
+    const { isAuthenticated, validatePassword, error } = useAuth();
+    const navigate = useNavigate();
 
     const handleLogin = () => {
-        console.log("Login button clicked");
-        validatePassword(password);
+        if (validatePassword(password)) {
+            navigate('/admin');
+        }
     };
 
 
