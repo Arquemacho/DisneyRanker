@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuth from './useAuth';
 
@@ -7,10 +7,14 @@ const AdminLogin = () => {
     const { isAuthenticated, validatePassword, error } = useAuth();
     const navigate = useNavigate();
 
-    const handleLogin = () => {
-        if (validatePassword(password)) {
+    useEffect(() => {
+        if (isAuthenticated) {
             navigate('/admin');
         }
+    }, [isAuthenticated, navigate]);
+
+    const handleLogin = () => {
+        validatePassword(password);
     };
 
 

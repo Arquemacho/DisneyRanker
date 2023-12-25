@@ -9,6 +9,7 @@ import AdminDashboard from './admin/AdminDashboard'; // Adjust the path as neede
 import MoviesManagement from './admin/MoviesManagement'; // Adjust the path as needed
 import UserStats from './admin/UserStats'; // Adjust the path as needed
 import DeviceUsage from './admin/DeviceUsage'; // Adjust the path as needed
+import AdminLogin from './admin/AdminLogin';
 
 const App = () => {
     return (
@@ -22,6 +23,7 @@ const App = () => {
                 <Route path="/admin/movies" element={<PrivateRoute><MoviesManagement /></PrivateRoute>} />
                 <Route path="/admin/stats" element={<PrivateRoute><UserStats /></PrivateRoute>} />
                 <Route path="/admin/device-usage" element={<PrivateRoute><DeviceUsage /></PrivateRoute>} />
+                <Route path="/admin/login" element={<AdminLogin />} />
             </Routes>
         </Router>
     );
