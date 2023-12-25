@@ -3,7 +3,7 @@ import useAuth from './useAuth';
 
 const AdminLogin = () => {
     const [password, setPassword] = useState('');
-    const { validatePassword } = useAuth();
+    const { validatePassword, error } = useAuth();
 
     const handleLogin = () => {
         validatePassword(password);
@@ -18,6 +18,7 @@ const AdminLogin = () => {
                 placeholder="Enter Admin Password"
             />
             <button onClick={handleLogin}>Login</button>
+            {error && <p style={{ color: 'red' }}>{error}</p>}
         </div>
     );
 };
