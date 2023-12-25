@@ -1,6 +1,5 @@
-// AdminLogin.js
 import React, { useState } from 'react';
-import useAuth from './useAuth'; // Update the import path as necessary
+import useAuth from './useAuth';
 
 const AdminLogin = () => {
     const [password, setPassword] = useState('');
