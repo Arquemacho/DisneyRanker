@@ -1,8 +1,7 @@
-// PrivateRoute.js
 import React from 'react';
-import { Route, Navigate } from 'react-router-dom';
-import useAuth from './useAuth'; // Update this path
-import AdminLogin from './AdminLogin'; // Path to your AdminLogin component
+import { Navigate } from 'react-router-dom';
+import useAuth from './useAuth';
+import AdminLogin from './AdminLogin';
 
 const PrivateRoute = ({ children }) => {
     const { isAuthenticated } = useAuth();
@@ -11,7 +10,7 @@ const PrivateRoute = ({ children }) => {
         return <AdminLogin />;
     }
 
-    return children;
+    return isAuthenticated ? children : <Navigate to="/admin" />;
 };
 
 export default PrivateRoute;
