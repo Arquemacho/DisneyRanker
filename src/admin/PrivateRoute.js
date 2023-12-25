@@ -1,11 +1,17 @@
 // PrivateRoute.js
 import React from 'react';
-import { Navigate } from 'react-router-dom';
-import { useAuth } from './path-to-your-auth-hook'; // Update with actual path
+import { Route, Navigate } from 'react-router-dom';
+import useAuth from './useAuth'; // Update this path
+import AdminLogin from './AdminLogin'; // Path to your AdminLogin component
 
 const PrivateRoute = ({ children }) => {
-    const auth = useAuth(); // Implement this hook based on your authentication logic
-    return auth ? children : <Navigate to="/" />;
+    const { isAuthenticated } = useAuth();
+
+    if (!isAuthenticated) {
+        return <AdminLogin />;
+    }
+
+    return children;
 };
 
 export default PrivateRoute;
