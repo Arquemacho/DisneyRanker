@@ -19,11 +19,11 @@ const App = () => {
                 <Route path="/selection" element={<MovieSelectionScreen />} />
                 <Route path="/tournament" element={<Tournament />} />
                 <Route path="/ranking" element={<Ranking />} />
-                <Route path="/admin" element={<PrivateRoute><AdminDashboard /></PrivateRoute>} />
                 <Route path="/admin/movies" element={<PrivateRoute><MoviesManagement /></PrivateRoute>} />
                 <Route path="/admin/stats" element={<PrivateRoute><UserStats /></PrivateRoute>} />
                 <Route path="/admin/device-usage" element={<PrivateRoute><DeviceUsage /></PrivateRoute>} />
                 <Route path="/admin/login" element={<AdminLogin />} />
+                <Route path="/admin" element={<PrivateRoute><AdminDashboard /></PrivateRoute>} />
             </Routes>
         </Router>
     );

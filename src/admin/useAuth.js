@@ -11,12 +11,10 @@ const useAuth = () => {
         if (inputPassword === ADMIN_PASSWORD) {
             setIsAuthenticated(true);
             setError('');
-            // Remove the navigate call here
         } else {
             setError('Incorrect password. Please try again.');
         }
     };
-
 
     return { isAuthenticated, validatePassword, error };
 };

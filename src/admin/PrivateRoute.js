@@ -5,7 +5,7 @@ import useAuth from './useAuth';
 const PrivateRoute = ({ children }) => {
     const { isAuthenticated } = useAuth();
 
-    return isAuthenticated ? children : <Navigate to="/admin/login" />;
+    return isAuthenticated ? children : <Navigate to="/admin/login" replace />;
 };
 
 
