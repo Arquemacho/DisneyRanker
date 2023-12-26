@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Chart, Bar } from 'react-chartjs-2';
-import './admin.css'; // Import the CSS file
+import './admin.css';
 import BackToDashboardButton from './BackToDashboardButton';
 
 ChartJS.register(
@@ -18,14 +18,13 @@ const PopularMoviesDashboard = () => {
     const [detailedMovieStats, setDetailedMovieStats] = useState(null);
     const [filteredMovieData, setFilteredMovieData] = useState([]);
 
-
     useEffect(() => {
         fetch('http://186.113.234.239:3001/api/popular-movies')
             .then(res => res.json())
             .then(data => {
                 const filteredData = data.filter(movie => movie.winner.trim() !== '');
                 setMovieData(filteredData);
-                setFilteredMovieData(filteredData.slice(0, 10)); // Show top 10 by default
+                setFilteredMovieData(filteredData.slice(0, 30)); // Show top 30 by default
             })
             .catch(err => console.error(err));
     }, []);
@@ -40,13 +39,16 @@ const PopularMoviesDashboard = () => {
         setFilteredMovieData(sortedData.slice(0, 10));
     };
 
+    const showTop30 = () => {
+        setFilteredMovieData(movieData.slice(0, 30));
+    };
+
     const fetchMovieDetails = (movieTitle) => {
         fetch(`http://186.113.234.239:3001/api/movie-details/${movieTitle}`)
             .then(res => res.json())
             .then(data => setDetailedMovieStats(data))
             .catch(err => console.error(err));
     };
-
 
     const chartData = {
         labels: filteredMovieData.map(movie => movie.winner),
@@ -73,13 +75,13 @@ const PopularMoviesDashboard = () => {
         }
     };
 
-
     return (
         <div className="popular-movies-dashboard">
             <h2>Popular Movies Dashboard</h2>
             <div className="dashboard-controls">
                 <button onClick={showTopWinners}>Show Top Winners</button>
                 <button onClick={showTopLosers}>Show Top Losers</button>
+                <button onClick={showTop30}>Show Top 30</button>
             </div>
             <Bar data={chartData} options={options} />
             {detailedMovieStats && (
@@ -87,13 +89,12 @@ const PopularMoviesDashboard = () => {
                     <h3>Details for {detailedMovieStats.title}</h3>
                     <p>Wins: {detailedMovieStats.wins}</p>
                     <p>Losses: {detailedMovieStats.losses}</p>
+                    {/* Add more details as needed */}
                 </div>
             )}
-
             <BackToDashboardButton />
         </div>
     );
-
 };
 
 export default PopularMoviesDashboard;
