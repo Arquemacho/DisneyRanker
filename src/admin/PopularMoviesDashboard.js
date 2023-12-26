@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Chart } from 'react-chartjs-2';
+import { Chart, Bar } from 'react-chartjs-2';
+import { CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import './admin.css'; // Import the CSS file
-import BackToDashboardButton from './BackToDashboardButton'; // Correct path as per your project structure
+import BackToDashboardButton from './BackToDashboardButton';
+
+Chart.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+
 const PopularMoviesDashboard = () => {
     const [movieData, setMovieData] = useState([]);
 
@@ -12,7 +16,6 @@ const PopularMoviesDashboard = () => {
             .catch(err => console.error(err));
     }, []);
 
-    // Prepare data for Chart.js
     const chartData = {
         labels: movieData.map(movie => movie.winner),
         datasets: [{
@@ -24,10 +27,22 @@ const PopularMoviesDashboard = () => {
         }]
     };
 
+    const options = {
+        scales: {
+            y: {
+                beginAtZero: true,
+                type: 'linear',
+            },
+            x: {
+                type: 'category',
+            }
+        }
+    };
+
     return (
         <div className="popular-movies-dashboard">
             <h2>Popular Movies Dashboard</h2>
-            <Chart type="bar" data={chartData} />
+            <Bar data={chartData} options={options} />
             <BackToDashboardButton />
         </div>
     );
