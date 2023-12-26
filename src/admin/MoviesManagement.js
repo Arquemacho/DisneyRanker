@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './admin.css'; // Import the CSS file
+import BackToDashboardButton from './BackToDashboardButton';
 
 const MoviesManagement = () => {
     const [movies, setMovies] = useState([]);
@@ -87,8 +88,7 @@ const MoviesManagement = () => {
                     </div>
                 ))}
             </div>
-
-            <button onClick={navigateToDashboard} className="dashboard-button">Back to Dashboard</button>
+            <BackToDashboardButton />
         </div>
     );
 };

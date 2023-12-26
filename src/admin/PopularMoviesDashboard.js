@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Chart } from 'react-chartjs-2';
 import './admin.css'; // Import the CSS file
-
+import BackToDashboardButton from './BackToDashboardButton';
 const PopularMoviesDashboard = () => {
     const [movieData, setMovieData] = useState([]);
 
@@ -28,6 +28,7 @@ const PopularMoviesDashboard = () => {
         <div className="popular-movies-dashboard">
             <h2>Popular Movies Dashboard</h2>
             <Chart type="bar" data={chartData} />
+            <BackToDashboardButton />
         </div>
     );
 };

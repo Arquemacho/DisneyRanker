@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './admin.css'; // Import the CSS file
+import { useHistory } from 'react-router-dom'; // Add this line
 
 const DeviceUsage = () => {
     const [deviceData, setDeviceData] = useState([]);
@@ -19,6 +20,7 @@ const DeviceUsage = () => {
                     <li key={index} className="data-item">{device.deviceInfo}: {device.count}</li>
                 ))}
             </ul>
+            <BackToDashboardButton />
         </div>
     );
 };

@@ -89,3 +89,16 @@
     color: red;
     margin-top: 10px;
 }
+.dashboard-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.dashboard-button:hover {
+    background-color: #45a049;
+}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './admin.css'; // Import the CSS file
-
+import BackToDashboardButton from './BackToDashboardButton';
 const UserStats = () => {
     const [stats, setStats] = useState({});
 
@@ -20,6 +20,7 @@ const UserStats = () => {
             <h2>User Statistics</h2>
             <p>Total Tournaments: {stats.totalTournaments}</p>
             <p>Average Rounds per Tournament: {stats.averageRoundsPerTournament}</p>
+            <BackToDashboardButton />
         </div>
     );
 };
