@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext'; // Go up one directory level
-
-// AdminLogin.js
+import './admin.css'; // Import the CSS file
 
 const AdminLogin = () => {
     const [password, setPassword] = useState('');
@@ -19,24 +18,19 @@ const AdminLogin = () => {
         validatePassword(password);
     };
 
-    // AdminLogin.js
-
-// ... other code ...
-
-return (
-    <div>
-        <input 
-            type="password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter Admin Password"
-        />
-        <button onClick={handleLogin}>Login</button>
-        {/* <p style={{ color: 'red' }}>Error: {error}</p>  Directly display the error state */}
-    </div>
-);
-
+    return (
+        <div className="admin-login">
+            <input 
+                type="password" 
+                value={password} 
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter Admin Password"
+                className="input-field"
+            />
+            <button onClick={handleLogin} className="action-button">Login</button>
+            {error && <p className="error-text">Error: {error}</p>}
+        </div>
+    );
 };
-
 
 export default AdminLogin;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Chart } from 'react-chartjs-2';
+import './admin.css'; // Import the CSS file
 
 const PopularMoviesDashboard = () => {
     const [movieData, setMovieData] = useState([]);
@@ -24,7 +25,7 @@ const PopularMoviesDashboard = () => {
     };
 
     return (
-        <div>
+        <div className="popular-movies-dashboard">
             <h2>Popular Movies Dashboard</h2>
             <Chart type="bar" data={chartData} />
         </div>

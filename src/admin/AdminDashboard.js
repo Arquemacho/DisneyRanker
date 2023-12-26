@@ -1,20 +1,19 @@
-// AdminDashboard.js
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './admin.css'; // Import the CSS file
 
 const AdminDashboard = () => {
-    console.log("Rendering AdminDashboard"); // Add for debugging
+    console.log("Rendering AdminDashboard");
     return (
-        <div>
+        <div className="admin-dashboard">
             <h1>Admin Dashboard</h1>
-            <nav>
+            <nav className="admin-nav">
                 <ul>
-                    <li><Link to="/admin/movies">Manage Movies</Link></li>
-                    <li><Link to="/admin/stats">User Statistics</Link></li>
-                    <li><Link to="/admin/device-usage">Device Usage</Link></li>
-                    <li><Link to="/admin/popular-movies">Popular Movies Dashboard</Link></li>
-                    <li><Link to="/admin/matchups">Matchup Analysis</Link></li>
-                    {/* Add more links as needed */}
+                    <li><Link to="/admin/movies" className="nav-link">Manage Movies</Link></li>
+                    <li><Link to="/admin/stats" className="nav-link">User Statistics</Link></li>
+                    <li><Link to="/admin/device-usage" className="nav-link">Device Usage</Link></li>
+                    <li><Link to="/admin/popular-movies" className="nav-link">Popular Movies Dashboard</Link></li>
+                    <li><Link to="/admin/matchups" className="nav-link">Matchup Analysis</Link></li>
                 </ul>
             </nav>
         </div>

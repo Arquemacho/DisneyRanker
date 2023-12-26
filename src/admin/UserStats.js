@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './admin.css'; // Import the CSS file
 
 const UserStats = () => {
     const [stats, setStats] = useState({});
@@ -15,11 +16,10 @@ const UserStats = () => {
     
 
     return (
-        <div>
+        <div className="user-stats">
             <h2>User Statistics</h2>
             <p>Total Tournaments: {stats.totalTournaments}</p>
             <p>Average Rounds per Tournament: {stats.averageRoundsPerTournament}</p>
-            {/* Display more stats as needed */}
         </div>
     );
 };

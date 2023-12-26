@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './admin.css'; // Import the CSS file
 
 const DeviceUsage = () => {
     const [deviceData, setDeviceData] = useState([]);
@@ -11,11 +12,11 @@ const DeviceUsage = () => {
     }, []);
 
     return (
-        <div>
+        <div className="device-usage">
             <h2>Device Usage Patterns</h2>
-            <ul>
+            <ul className="data-list">
                 {deviceData.map((device, index) => (
-                    <li key={index}>{device.deviceInfo}: {device.count}</li>
+                    <li key={index} className="data-item">{device.deviceInfo}: {device.count}</li>
                 ))}
             </ul>
         </div>
