@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import './admin.css'; // Import the CSS file
 
 const MoviesManagement = () => {
     const [movies, setMovies] = useState([]);
     const [newMovieTitle, setNewMovieTitle] = useState('');
     const [newMoviePosterUrl, setNewMoviePosterUrl] = useState('');
+    const history = useHistory();
+
+    const navigateToDashboard = () => {
+        history.push('/admin-dashboard'); // Update with your admin dashboard route
+    };
 
     useEffect(() => {
         fetchMovies();
@@ -53,28 +59,36 @@ const MoviesManagement = () => {
     };
 
     return (
-        <div>
+        <div className="movies-management">
             <h2>Manage Movies</h2>
-            <input
-                type="text"
-                value={newMovieTitle}
-                onChange={(e) => setNewMovieTitle(e.target.value)}
-                placeholder="Movie Title"
-            />
-            <input
-                type="text"
-                value={newMoviePosterUrl}
-                onChange={(e) => setNewMoviePosterUrl(e.target.value)}
-                placeholder="Poster URL"
-            />
-            <button onClick={addMovie}>Add Movie</button>
+            <div className="add-movie-form">
+                <input
+                    type="text"
+                    value={newMovieTitle}
+                    onChange={(e) => setNewMovieTitle(e.target.value)}
+                    placeholder="Movie Title"
+                    className="input-field"
+                />
+                <input
+                    type="text"
+                    value={newMoviePosterUrl}
+                    onChange={(e) => setNewMoviePosterUrl(e.target.value)}
+                    placeholder="Poster URL"
+                    className="input-field"
+                />
+                <button onClick={addMovie} className="action-button">Add Movie</button>
+            </div>
 
-            {movies.map((movie, index) => (
-                <div key={index}>
-                    <span>{movie.title}</span>
-                    <button onClick={() => deleteMovie(movie.title)}>Delete</button>
-                </div>
-            ))}
+            <div className="movie-list">
+                {movies.map((movie, index) => (
+                    <div key={index} className="movie-item">
+                        <span>{movie.title}</span>
+                        <button onClick={() => deleteMovie(movie.title)} className="delete-button">Delete</button>
+                    </div>
+                ))}
+            </div>
+
+            <button onClick={navigateToDashboard} className="dashboard-button">Back to Dashboard</button>
         </div>
     );
 };

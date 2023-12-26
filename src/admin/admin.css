@@ -1,0 +1,53 @@
+.movies-management {
+    padding: 20px;
+    max-width: 600px;
+    margin: auto;
+}
+
+.add-movie-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.input-field {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.action-button, .delete-button, .dashboard-button {
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+.action-button {
+    background-color: #4CAF50; /* Green */
+}
+
+.delete-button {
+    background-color: #f44336; /* Red */
+}
+
+.dashboard-button {
+    background-color: #008CBA; /* Blue */
+    margin-top: 20px;
+}
+
+.movie-list {
+    margin-bottom: 20px;
+}
+
+.movie-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
