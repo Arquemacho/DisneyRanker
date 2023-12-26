@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import { Chart, Bar } from 'react-chartjs-2';
+import './admin.css'; // Import the CSS file
+import BackToDashboardButton from './BackToDashboardButton';
 
 ChartJS.register(
   CategoryScale,
@@ -17,11 +12,6 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-
-import { Chart, Bar } from 'react-chartjs-2';
-import './admin.css'; // Import the CSS file
-import BackToDashboardButton from './BackToDashboardButton';
-
 
 const PopularMoviesDashboard = () => {
     const [movieData, setMovieData] = useState([]);
