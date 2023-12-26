@@ -54,12 +54,14 @@ app.post('/api/add-movie', async (req, res) => {
 
     try {
         await db.run('INSERT INTO movies (title) VALUES (?)', [title]);
+        console.log(`Movie added: ${title}`); // Log the movie addition
         res.status(200).send('Movie added successfully');
     } catch (err) {
         console.error('Error adding movie:', err.message);
         res.status(500).send(err.message);
     }
 });
+
 
 app.post('/api/add-poster', async (req, res) => {
     const { movieTitle, posterUrl } = req.body;
@@ -86,12 +88,14 @@ app.delete('/api/delete-movie', async (req, res) => {
         // Optional: Delete posters associated with the movie
         await db.run('DELETE FROM posters WHERE movieId IN (SELECT id FROM movies WHERE title = ?)', [title]);
         
+        console.log(`Movie deleted: ${title}`); // Log the movie deletion
         res.status(200).send('Movie and associated posters deleted successfully');
     } catch (err) {
         console.error('Error deleting movie:', err.message);
         res.status(500).send(err.message);
     }
 });
+
 
 
 app.get('/api/movies', (req, res) => {
