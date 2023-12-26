@@ -1,13 +1,13 @@
-// BackToDashboardButton.js
+// Use useNavigate instead of useHistory
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import './admin.css'; // Assuming your styles are defined here
+import { useNavigate } from 'react-router-dom';
+import './admin.css';
 
 const BackToDashboardButton = () => {
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const navigateToDashboard = () => {
-        history.push('/admin'); // Update with your admin dashboard route
+        navigate('/admin'); // Update to correct admin dashboard route
     };
 
     return (

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Chart } from 'react-chartjs-2';
 import './admin.css'; // Import the CSS file
-import BackToDashboardButton from './BackToDashboardButton';
+import BackToDashboardButton from './BackToDashboardButton'; // Correct path as per your project structure
 const PopularMoviesDashboard = () => {
     const [movieData, setMovieData] = useState([]);
 

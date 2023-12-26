@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './admin.css'; // Import the CSS file
+import BackToDashboardButton from './BackToDashboardButton'; // Correct path as per your project structure
 
 const AdminDashboard = () => {
     console.log("Rendering AdminDashboard");

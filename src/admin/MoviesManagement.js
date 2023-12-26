@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './admin.css'; // Import the CSS file
-import BackToDashboardButton from './BackToDashboardButton';
+import BackToDashboardButton from './BackToDashboardButton'; // Correct path as per your project structure
 
 const MoviesManagement = () => {
     const [movies, setMovies] = useState([]);

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext'; // Go up one directory level
 import './admin.css'; // Import the CSS file
+import BackToDashboardButton from './BackToDashboardButton'; // Correct path as per your project structure
 
 const AdminLogin = () => {
     const [password, setPassword] = useState('');

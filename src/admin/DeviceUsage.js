@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './admin.css'; // Import the CSS file
-import { useHistory } from 'react-router-dom'; // Add this line
+import BackToDashboardButton from './BackToDashboardButton'; // Correct path as per your project structure
 
 const DeviceUsage = () => {
     const [deviceData, setDeviceData] = useState([]);
