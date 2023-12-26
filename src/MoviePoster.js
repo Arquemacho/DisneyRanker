@@ -4,7 +4,7 @@ const MoviePoster = ({ title }) => {
     const [posterUrl, setPosterUrl] = useState('');
 
     useEffect(() => {
-        fetch(`http://localhost:3001/api/poster/${title}`)
+        fetch(`http://186.113.234.239:3001/api/poster/${title}`)
             .then(res => res.json())
             .then(data => setPosterUrl(data.posterUrl))
             .catch(err => console.error('Failed to fetch poster:', err));

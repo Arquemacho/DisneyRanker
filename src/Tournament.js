@@ -36,7 +36,7 @@ const Tournament = () => {
     }, [moviesFromSelection]);
 
     const fetchMoviesAndInitialize = () => {
-        fetch('http://localhost:3001/api/movies')
+        fetch('http://186.113.234.239:3001/api/movies')
             .then(response => response.json())
             .then(moviesData => {
                 const movieTitles = moviesData.map(movie => movie.title);
@@ -129,7 +129,7 @@ const Tournament = () => {
 
     const deleteMovie = async (movieTitle) => {
         try {
-            const response = await fetch('http://localhost:3001/api/delete-movie', {
+            const response = await fetch('http://186.113.234.239:3001/api/delete-movie', {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ title: movieTitle })
