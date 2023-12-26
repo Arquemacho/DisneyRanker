@@ -14,7 +14,7 @@ const MoviePoster = ({ title }) => {
     return (
         <div>
             <h3>{title}</h3>
-            {posterUrl ? <img src={posterUrl} alt={`Poster of ${title}`} /> : <p>Poster not found</p>}
+            {posterUrl ? <img src={posterUrl} className="movie-poster" alt={`Poster of ${title}`} /> : <p>Poster not found</p>}
         </div>
     );
 };

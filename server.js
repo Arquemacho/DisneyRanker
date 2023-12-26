@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 // Initialize SQLite database
-const db = new sqlite3.Database('./myTournamentData.db', (err) => {
+const db = new sqlite3.Database('./myTournamentData.db', sqlite3.OPEN_READWRITE, (err) => {
     if (err) {
         console.error('Error connecting to SQLite database:', err.message);
     } else {
@@ -30,9 +30,10 @@ const createMoviesTable = () => {
 };
 
 const createPostersTable = () => {
-    db.run(`CREATE TABLE IF NOT EXISTS posters (
+    db.run(`CREATE TABLE posters (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         movieId INTEGER,
+        title TEXT,
         posterUrl TEXT,
         FOREIGN KEY (movieId) REFERENCES movies(id)
     )`, [], (err) => {
@@ -103,6 +104,29 @@ app.get('/api/movies', (req, res) => {
         res.json(rows);
     });
 });
+
+app.get('/api/poster/:title', (req, res) => {
+    const { title } = req.params;
+    console.log(`Fetching poster for title: ${title}`); // Log the received title
+
+    const sql = `SELECT p.posterUrl FROM posters p
+                 JOIN movies m ON p.movieId = m.id
+                 WHERE m.title = ?`;
+
+    db.get(sql, [title], (err, row) => {
+        if (err) {
+            console.error('Error querying for poster:', err.message);
+            res.status(500).send(err.message);
+        } else if (row) {
+            console.log(`Poster found: ${row.posterUrl}`); // Log the found poster URL
+            res.json({ posterUrl: row.posterUrl });
+        } else {
+            console.log('Poster not found for title:', title); // Log if not found
+            res.status(404).send('Poster not found');
+        }
+    });
+});
+
 
 
 // Create table for selections if it doesn't exist
@@ -198,8 +222,6 @@ app.get('/api/device-usage', (req, res) => {
         res.json(rows);
     });
 });
-
-
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);

@@ -19,7 +19,16 @@ const Tournament = () => {
     useEffect(() => {
         setSessionID(generateUniqueID());
 
-        if (moviesFromSelection.length > 0) {
+        const savedState = localStorage.getItem('tournamentState');
+        if (savedState) {
+            const { currentRound, nextRound, winner, matchupIndex, totalMatchupsInRound, selectionHistory } = JSON.parse(savedState);
+            setCurrentRound(currentRound);
+            setNextRound(nextRound);
+            setWinner(winner);
+            setMatchupIndex(matchupIndex);
+            setTotalMatchupsInRound(totalMatchupsInRound);
+            setSelectionHistory(selectionHistory);
+        } else if (moviesFromSelection.length > 0) {
             initializeTournament(moviesFromSelection);
         } else {
             fetchMoviesAndInitialize();
@@ -36,60 +45,6 @@ const Tournament = () => {
             .catch(error => console.error('Failed to fetch movies:', error));
     };
 
-    useEffect(() => {
-        const savedState = localStorage.getItem('tournamentState');
-        if (savedState) {
-            const { currentRound, nextRound, winner, matchupIndex, totalMatchupsInRound, selectionHistory } = JSON.parse(savedState);
-            setCurrentRound(currentRound);
-            setNextRound(nextRound);
-            setWinner(winner);
-            setMatchupIndex(matchupIndex);
-            setTotalMatchupsInRound(totalMatchupsInRound);
-            setSelectionHistory(selectionHistory);
-        } else {
-            initializeTournament(movies);
-        }
-    }, []);
-
-    
-    function generateUniqueID() {
-        return Math.random().toString(36).substr(2, 9);
-    }
-
-    useEffect(() => {
-        if (moviesFromSelection.length > 0) {
-            initializeTournament(moviesFromSelection);
-        } else {
-            // Handle case where no movies are passed
-            initializeTournament(movies);
-        }
-    }, [moviesFromSelection]);
-
-    const startNewTournament = () => {
-        localStorage.removeItem('tournamentState'); // Clear saved state
-        setTotalMatchupsInRound(0); // Reset the total matchups for the new tournament
-        initializeTournament(movies); // Start a new tournament
-        setSessionID(generateUniqueID()); // Generate new session ID
-    };
-
-
-    useEffect(() => {
-        // Automatically advance if only one movie in the matchup
-        if (currentRound[matchupIndex] && currentRound[matchupIndex].length === 1) {
-            selectMovie(currentRound[matchupIndex][0]);
-        }
-    }, [currentRound, matchupIndex]);
-
-    useEffect(() => {
-        window.addEventListener('keydown', handleKeyDown);
-
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown);
-        };
-    }, [currentRound, matchupIndex]);
-
-
-
     const initializeTournament = (moviesArray) => {
         const shuffledMovies = [...moviesArray].sort(() => 0.5 - Math.random());
         const initialRound = [];
@@ -105,21 +60,22 @@ const Tournament = () => {
         setMatchupIndex(0);
     };
 
+    function generateUniqueID() {
+        return Math.random().toString(36).substr(2, 9);
+    }
+
     const handleKeyDown = (event) => {
         const currentMatchup = currentRound[matchupIndex];
         if (!currentMatchup || currentMatchup.length === 0) return;
 
         if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
-            // Existing logic for selecting movies
             const movieIndex = event.key === 'ArrowLeft' ? 0 : 1;
             if (currentMatchup[movieIndex]) {
                 selectMovie(currentMatchup[movieIndex]);
             }
         } else if (event.key === 'a' && currentMatchup.length > 0) {
-            // 'A' key pressed, delete the movie on the left
             deleteMovie(currentMatchup[0]);
         } else if (event.key === 's' && currentMatchup.length > 1) {
-            // 'S' key pressed, delete the movie on the right
             deleteMovie(currentMatchup[1]);
         }
     };
@@ -128,12 +84,7 @@ const Tournament = () => {
         if (winner) return;
 
         let updatedNextRound = [...nextRound, selectedMovie];
-
-        // Find the loser movie
         const loserMovie = currentRound[matchupIndex].find(movie => movie !== selectedMovie);
-
-        // Log the selection
-        const tournamentRound = calculateTournamentRound(totalMatchupsInRound);
 
         const selection = {
             sessionID: sessionID,
@@ -141,25 +92,20 @@ const Tournament = () => {
                 winner: selectedMovie,
                 loser: loserMovie
             },
-            round: tournamentRound, // Use the calculated round
+            round: calculateTournamentRound(totalMatchupsInRound),
             timestamp: new Date().toISOString(),
             deviceInfo: navigator.userAgent
         };
 
-
-        // Update the selection history
         setSelectionHistory(prevHistory => [...prevHistory, selection]);
-
-        // Send selection data to the backend
         sendDataToBackend(selection);
 
         if (matchupIndex === currentRound.length - 1) {
             if (updatedNextRound.length === 1) {
                 setWinner(updatedNextRound[0]);
             } else {
-                const newRound = createRound(updatedNextRound);
-                setCurrentRound(newRound);
-                setTotalMatchupsInRound(newRound.length);
+                setCurrentRound(createRound(updatedNextRound));
+                setTotalMatchupsInRound(updatedNextRound.length);
                 setNextRound([]);
                 setMatchupIndex(0);
             }
@@ -169,69 +115,36 @@ const Tournament = () => {
         }
     }
 
-    const saveStateToLocalStorage = () => {
-        const state = {
-            currentRound,
-            nextRound,
-            winner,
-            matchupIndex,
-            totalMatchupsInRound,
-            selectionHistory,
-        };
-        localStorage.setItem('tournamentState', JSON.stringify(state));
-    };
-
-    function calculateTournamentRound(totalMatchups) {
-        return Math.pow(2, Math.ceil(Math.log2(totalMatchups * 2)));
-    }
-
-    useEffect(() => {
-        // Save state to local storage whenever there's a change
-        saveStateToLocalStorage();
-    }, [currentRound, nextRound, winner, matchupIndex, totalMatchupsInRound, selectionHistory]);
-
-    
     async function sendDataToBackend(selection) {
         try {
             await fetch('http://186.113.234.239:3001/api/selection', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(selection),
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(selection)
             });
         } catch (error) {
             console.error('Error sending selection data to backend:', error);
         }
-    }      
-    
+    }
+
     const deleteMovie = async (movieTitle) => {
         try {
-            // Update the URL to point to your backend server on port 3001
             const response = await fetch('http://localhost:3001/api/delete-movie', {
                 method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ movieName: movieTitle }),
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ title: movieTitle })
             });
 
             if (response.ok) {
-                // Assuming the response is successful, update the state to remove the movie from the UI
                 setCurrentRound(currentRound => currentRound.map(matchup => matchup.filter(movie => movie !== movieTitle)));
                 setNextRound(nextRound => nextRound.filter(movie => movie !== movieTitle));
             } else {
-                // Handle any errors here
                 console.error('Failed to delete the movie');
-                const resText = await response.text();
-                console.log('Server response:', resText);
             }
         } catch (error) {
             console.error('Error deleting movie:', error);
         }
     };
-
-
 
     const createRound = (winners) => {
         let newRound = [];
@@ -242,30 +155,32 @@ const Tournament = () => {
     };
 
     const getRoundName = (numMovies) => {
-        if (numMovies <= 2) return 'Final';
-        if (numMovies <= 4) return 'Semi Final';
-        if (numMovies <= 8) return 'Cuartos de Final';
-        if (numMovies <= 16) return 'Octavos de Final';
-        if (numMovies <= 32) return 'Ronda de 32';
-        if (numMovies <= 64) return 'Ronda de 64';
-        if (numMovies <= 128) return 'Ronda de 128';
-        if (numMovies <= 256) return 'Ronda de 256';
-        if (numMovies <= 512) return 'Ronda de 512';
-        if (numMovies <= 1024) return 'Ronda de 1024';
-        return '';
+        const names = ['Final', 'Semi Final', 'Cuartos de Final', 'Octavos de Final', 'Ronda de 32', 'Ronda de 64', 'Ronda de 128', 'Ronda de 256', 'Ronda de 512', 'Ronda de 1024'];
+        let index = Math.ceil(Math.log2(numMovies / 2));
+        return names[index] || '';
     };
 
-    useEffect(() => {
-        if (winner) {
-            triggerConfetti();
-        }
-    }, [winner]); // Dependency array with 'winner' to run only when 'winner' changes
     const triggerConfetti = () => {
-        confetti({
-            particleCount: 2001,
-            spread: 300,
-            origin: { y: 0.4} // Adjust as needed
-        });
+        if (winner) {
+            confetti({
+                particleCount: 2001,
+                spread: 300,
+                origin: { y: 0.4 }
+            });
+        }
+    };
+
+    useEffect(triggerConfetti, [winner]);
+    const calculateTournamentRound = (totalMatchups) => {
+        return Math.ceil(Math.log2(totalMatchups * 2));
+    };
+
+    const startNewTournament = () => {
+        fetchMoviesAndInitialize();
+        setSessionID(generateUniqueID());
+        setWinner(null);
+        setSelectionHistory([]);
+        localStorage.removeItem('tournamentState');
     };
         
 
