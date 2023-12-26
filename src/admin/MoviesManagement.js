@@ -10,7 +10,7 @@ const MoviesManagement = () => {
     }, []);
 
     const fetchMovies = () => {
-        fetch('http://localhost:3001/api/movies')
+        fetch('http://186.113.234.239:3001/api/movies')
             .then(res => res.json())
             .then(data => setMovies(data))
             .catch(err => console.error(err));
@@ -18,7 +18,7 @@ const MoviesManagement = () => {
 
     const addMovie = () => {
         // Add movie
-        fetch('http://localhost:3001/api/add-movie', {
+        fetch('http://186.113.234.239:3001/api/add-movie', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ title: newMovieTitle })
@@ -26,7 +26,7 @@ const MoviesManagement = () => {
         .then(response => response.json())
         .then(() => {
             // Add poster
-            fetch('http://localhost:3001/api/add-poster', {
+            fetch('http://186.113.234.239:3001/api/add-poster', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ movieTitle: newMovieTitle, posterUrl: newMoviePosterUrl })
@@ -41,7 +41,7 @@ const MoviesManagement = () => {
     };
 
     const deleteMovie = (title) => {
-        fetch('http://localhost:3001/api/delete-movie', {
+        fetch('http://186.113.234.239:3001/api/delete-movie', {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ title })

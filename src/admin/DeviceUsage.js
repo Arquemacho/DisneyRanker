@@ -4,7 +4,7 @@ const DeviceUsage = () => {
     const [deviceData, setDeviceData] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:3001/api/device-usage')
+        fetch('http://186.113.234.239:3001/api/device-usage')
             .then(res => res.json())
             .then(data => setDeviceData(data))
             .catch(err => console.error(err));

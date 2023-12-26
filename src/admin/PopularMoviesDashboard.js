@@ -5,7 +5,7 @@ const PopularMoviesDashboard = () => {
     const [movieData, setMovieData] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:3001/api/popular-movies')
+        fetch('http://186.113.234.239:3001/api/popular-movies')
             .then(res => res.json())
             .then(data => setMovieData(data))
             .catch(err => console.error(err));

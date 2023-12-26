@@ -107,7 +107,7 @@ app.get('/api/movies', (req, res) => {
 
 app.get('/api/poster/:title', (req, res) => {
     const { title } = req.params;
-    console.log(`Fetching poster for title: ${title}`); // Log the received title
+    // console.log(`Fetching poster for title: ${title}`); // Log the received title
 
     const sql = `SELECT p.posterUrl FROM posters p
                  JOIN movies m ON p.movieId = m.id
@@ -118,7 +118,7 @@ app.get('/api/poster/:title', (req, res) => {
             console.error('Error querying for poster:', err.message);
             res.status(500).send(err.message);
         } else if (row) {
-            console.log(`Poster found: ${row.posterUrl}`); // Log the found poster URL
+            // console.log(`Poster found: ${row.posterUrl}`); // Log the found poster URL
             res.json({ posterUrl: row.posterUrl });
         } else {
             console.log('Poster not found for title:', title); // Log if not found
