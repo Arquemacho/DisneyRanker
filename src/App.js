@@ -10,6 +10,7 @@ import MoviesManagement from './admin/MoviesManagement'; // Adjust the path as n
 import UserStats from './admin/UserStats'; // Adjust the path as needed
 import DeviceUsage from './admin/DeviceUsage'; // Adjust the path as needed
 import AdminLogin from './admin/AdminLogin';
+import PopularMoviesDashboard from './admin/PopularMoviesDashboard';
 import { AuthProvider } from './AuthContext';
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
                     <Route path="/tournament" element={<Tournament />} />
                     <Route path="/ranking" element={<Ranking />} />
                     <Route path="/admin/movies" element={<PrivateRoute><MoviesManagement /></PrivateRoute>} />
+                    <Route path="/admin/popular-movies" element={<PrivateRoute><PopularMoviesDashboard /></PrivateRoute>} />
                     <Route path="/admin/stats" element={<PrivateRoute><UserStats /></PrivateRoute>} />
                     <Route path="/admin/device-usage" element={<PrivateRoute><DeviceUsage /></PrivateRoute>} />
                     <Route path="/admin/login" element={<AdminLogin />} />
