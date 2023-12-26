@@ -4,7 +4,7 @@ const UserStats = () => {
     const [stats, setStats] = useState({});
 
     useEffect(() => {
-        fetch('http://localhost:3001/api/user-stats')
+        fetch('http://186.113.234.239:3001/api/user-stats')
             .then(res => res.json())
             .then(data => {
                 // Handle the data
