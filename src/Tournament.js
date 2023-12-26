@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import movies from './movies';
 import MoviePoster from './MoviePoster';
 import { useLocation } from 'react-router-dom';
 import './TournamentStyles.css';
 import confetti from 'canvas-confetti';
-import {TwitterShareButton,WhatsappShareButton,TwitterIcon,WhatsappIcon} from 'react-share';
+import { TwitterShareButton, WhatsappShareButton, TwitterIcon, WhatsappIcon } from 'react-share';
 
 const Tournament = () => {
     const [currentRound, setCurrentRound] = useState([]);
@@ -18,9 +17,24 @@ const Tournament = () => {
     const [sessionID, setSessionID] = useState('');
 
     useEffect(() => {
-        // Generate a session ID when the component mounts
         setSessionID(generateUniqueID());
-    }, []);
+
+        if (moviesFromSelection.length > 0) {
+            initializeTournament(moviesFromSelection);
+        } else {
+            fetchMoviesAndInitialize();
+        }
+    }, [moviesFromSelection]);
+
+    const fetchMoviesAndInitialize = () => {
+        fetch('http://localhost:3001/api/movies')
+            .then(response => response.json())
+            .then(moviesData => {
+                const movieTitles = moviesData.map(movie => movie.title);
+                initializeTournament(movieTitles);
+            })
+            .catch(error => console.error('Failed to fetch movies:', error));
+    };
 
     useEffect(() => {
         const savedState = localStorage.getItem('tournamentState');
