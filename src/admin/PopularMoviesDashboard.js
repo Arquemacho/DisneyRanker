@@ -19,7 +19,6 @@ ChartJS.register(
   Legend
 );
 
-import React, { useState, useEffect } from 'react';
 import { Chart, Bar } from 'react-chartjs-2';
 import './admin.css'; // Import the CSS file
 import BackToDashboardButton from './BackToDashboardButton';
