@@ -110,9 +110,6 @@ const Tournament = () => {
         }
     };
 
-
-
-
     function selectMovie(selectedMovie) {
         if (winner) return;
 

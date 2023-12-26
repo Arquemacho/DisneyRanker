@@ -1,24 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import './TournamentStyles.css';
-import postersData from './movie_posters.json'; // Import your JSON file
 
 const MoviePoster = ({ title }) => {
     const [posterUrl, setPosterUrl] = useState('');
 
     useEffect(() => {
-        // Retrieve poster URL from the imported JSON data
-        const posterPath = postersData[title];
-        if (posterPath) {
-            setPosterUrl(posterPath);
-        } else {
-            console.error('Poster not found for: ', title);
-        }
+        fetch(`http://localhost:3001/api/poster/${title}`)
+            .then(res => res.json())
+            .then(data => setPosterUrl(data.posterUrl))
+            .catch(err => console.error('Failed to fetch poster:', err));
     }, [title]);
+    
 
     return (
         <div>
             <h3>{title}</h3>
-            {posterUrl ? <img src={posterUrl} alt={`Poster of ${title}`} className="movie-poster" /> : <p>Poster not found</p>}
+            {posterUrl ? <img src={posterUrl} alt={`Poster of ${title}`} /> : <p>Poster not found</p>}
         </div>
     );
 };

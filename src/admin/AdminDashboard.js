@@ -12,6 +12,8 @@ const AdminDashboard = () => {
                     <li><Link to="/admin/movies">Manage Movies</Link></li>
                     <li><Link to="/admin/stats">User Statistics</Link></li>
                     <li><Link to="/admin/device-usage">Device Usage</Link></li>
+                    <li><Link to="/admin/popular-movies">Popular Movies Dashboard</Link></li>
+                    <li><Link to="/admin/matchups">Matchup Analysis</Link></li>
                     {/* Add more links as needed */}
                 </ul>
             </nav>

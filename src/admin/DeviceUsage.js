@@ -1,17 +1,23 @@
-// DeviceUsage.js
 import React, { useEffect, useState } from 'react';
 
 const DeviceUsage = () => {
-    const [deviceData, setDeviceData] = useState({}); // Replace with actual data structure
+    const [deviceData, setDeviceData] = useState([]);
 
     useEffect(() => {
-        // Fetch device data from your server
+        fetch('http://localhost:3001/api/device-usage')
+            .then(res => res.json())
+            .then(data => setDeviceData(data))
+            .catch(err => console.error(err));
     }, []);
 
     return (
         <div>
             <h2>Device Usage Patterns</h2>
-            {/* Display device usage data here */}
+            <ul>
+                {deviceData.map((device, index) => (
+                    <li key={index}>{device.deviceInfo}: {device.count}</li>
+                ))}
+            </ul>
         </div>
     );
 };

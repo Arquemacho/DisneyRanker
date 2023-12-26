@@ -149,7 +149,6 @@ const movies = [
     "Pooh’s Heffalump Movie",
     "Return to Halloweentown",
     "Frankenweenie",
-    "Into the Woods",
     "The Pacifier",
     "The Cheetah Girls",
     "Beverly Hills Chihuahua",
@@ -200,4 +199,4 @@ const movies = [
     "Good Luck Charlie, It's Christmas!"
 ];
 
-export default movies;
+module.exports = movies;
