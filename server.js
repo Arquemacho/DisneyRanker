@@ -131,7 +131,30 @@ app.get('/api/poster/:title', (req, res) => {
     });
 });
 
+app.get('/api/movie-details/:title', async (req, res) => {
+    const { title } = req.params;
 
+    // Example SQL query to fetch detailed stats
+    const sql = `SELECT 
+                    winner, 
+                    COUNT(*) as wins, 
+                    (SELECT COUNT(*) FROM selections WHERE loser = ?) as losses 
+                 FROM selections 
+                 WHERE winner = ? 
+                 GROUP BY winner`;
+
+    try {
+        const stats = await db.get(sql, [title, title]);
+        if (stats) {
+            res.json(stats);
+        } else {
+            res.status(404).send('Movie not found');
+        }
+    } catch (err) {
+        console.error('Error fetching movie details:', err.message);
+        res.status(500).send('Server error');
+    }
+});
 
 // Create table for selections if it doesn't exist
 const createSelectionsTable = () => {

@@ -12,6 +12,7 @@ import DeviceUsage from './admin/DeviceUsage'; // Adjust the path as needed
 import AdminLogin from './admin/AdminLogin';
 import PopularMoviesDashboard from './admin/PopularMoviesDashboard';
 import { AuthProvider } from './AuthContext';
+import MatchupAnalysis from './admin/MatchupAnalysis'
 
 const App = () => {
     return (
@@ -28,6 +29,8 @@ const App = () => {
                     <Route path="/admin/device-usage" element={<PrivateRoute><DeviceUsage /></PrivateRoute>} />
                     <Route path="/admin/login" element={<AdminLogin />} />
                     <Route path="/admin" element={<PrivateRoute><AdminDashboard /></PrivateRoute>} />
+                    <Route path="/admin/matchups" element={<PrivateRoute><MatchupAnalysis /></PrivateRoute>} />
+
                 </Routes>
             </Router>
         </AuthProvider>
