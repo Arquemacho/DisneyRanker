@@ -12,9 +12,11 @@ const useAuth = () => {
             setIsAuthenticated(true);
             setError('');
         } else {
+            setIsAuthenticated(false);
             setError('Incorrect password. Please try again.');
+            console.log('Error set:', 'Incorrect password. Please try again.'); // For debugging
         }
-    };
+    };    
 
     return { isAuthenticated, validatePassword, error };
 };
