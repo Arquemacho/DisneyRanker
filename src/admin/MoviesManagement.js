@@ -6,11 +6,6 @@ const MoviesManagement = () => {
     const [movies, setMovies] = useState([]);
     const [newMovieTitle, setNewMovieTitle] = useState('');
     const [newMoviePosterUrl, setNewMoviePosterUrl] = useState('');
-    const history = useHistory();
-
-    const navigateToDashboard = () => {
-        history.push('/admin-dashboard'); // Update with your admin dashboard route
-    };
 
     useEffect(() => {
         fetchMovies();
